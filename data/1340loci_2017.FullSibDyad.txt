@@ -1,0 +1,3 @@
+OffspringID1,OffspringID2,Probability
+L3351,L5492,1.000
+L5480,L5481,0.005
