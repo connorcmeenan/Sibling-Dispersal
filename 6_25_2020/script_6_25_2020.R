@@ -1,5 +1,0 @@
-install.packages('matrixcalc')
-library(matrixcalc)
-upper_tri_alldists <- upper.triangle(alldists)
-head(upper_tri_alldists)
-hist(upper_tri_alldists)
