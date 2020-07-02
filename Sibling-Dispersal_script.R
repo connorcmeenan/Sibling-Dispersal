@@ -46,3 +46,30 @@ library(matrixcalc)
 upper_tri_alldists <- upper.triangle(alldists)
 head(upper_tri_alldists)
 hist(upper_tri_alldists)
+
+#redid distances
+trimmed_fish <- readRDS("trimmed_fish_meta_copy.rds")
+fish_1 <- trimmed_fish %>%
+rename(fish_indiv_1 = fish_indiv) %>%
+rename(fish_indiv1_lat = lat) %>%
+rename(fish_indiv1_lon = lon)
+head(fish_1)
+
+fish_2 <- trimmed_fish %>%
+rename(fish_indiv_2 = fish_indiv) %>%
+rename(fish_indiv2_lat = lat) %>%
+rename(fish_indiv2_lon = lon)
+head(fish_2)
+
+library(spectralGP)
+alldists_redo <- rdist.earth(as.matrix(fish_1[,c('fish_indiv1_lon', 'fish_indiv1_lat')]), as.matrix(fish_2[,c('fish_indiv2_lon', 'fish_indiv2_lat')]), miles=FALSE, R=6371)
+
+#installed reshape2
+install.packages('reshape2')
+library('reshape2')
+melted_alldists_redo <- melt(alldists_redo)
+fish_pairs_df1 <- melted_alldists_redo %>%
+rename(fish_1 = Var1) %>%
+rename(fish_2 = Var2) %>%
+rename(dist_km = value)
+head(fish_pairs_df1)

@@ -53,148 +53,90 @@ president<-read.csv(""/Desktop/President data _problem 2.108_.csv",header=F)
 president<-read.csv("/Desktop/President data _problem 2.108_.csv",header=F)
 president<-read.csv("/Users/Connor/Desktop/President data _problem 2.108_.csv",header=F)
 help.start()
-install.packages("tidyverse")
-yes
-install.packages("tidyverse")
-load("/Users/connormeenan/Desktop/Sibling-Dispersal/Sibling-Dispersal/data/fish_meta.rds")
-load("/Users/connormeenan/Desktop/Sibling-Dispersal/data/fish_meta.rds")
-readRDS(fish_meta.rds)
-readRDS(fish_meta)
-readRDS("fish_meta.rds")
-readRDS("fish_meta")
-readRDS()
-readRDS("fish_meta")
-load("/Users/connormeenan/Desktop/Sibling-Dispersal/data/fish_meta.rds")
-readRDS(Sibling-Dispersal = "fish_meta.rds")
-fish_meta <- readRDS("fish_meta.rds")
-file.exists(fish_meta.rds)
-file.exists("fish_meta.rds")
-filename <- file.choose("fish_meat.rds")
-fish_meta <- readRDS(filename)
-fish_meta <- readRDS(filename)
-library(dplyr)
-filename <- file.choose("fish_meat.rds")
-fish_meta <- readRDS(filename)
 getwd()
+setwd("/Users/connormeenan/desktop/Sibling-Dispersal"
 setwd("/Users/connormeenan/desktop/Sibling-Dispersal")
 getwd()
 fish_meta <- readRDS("data/fish_meta.rds")
-getwd()
-head(fish_meta)
-select(fihs_indiv, lat, lon)
-select(fish_indiv, lat, lon)
-select(fish_indiv, lat, lon)
-trimmed_fish_meta <- fish_meta %>%#
-select(fish_indiv, lat, lon)
 head(trimmed_fish_meta)
-alldists <- rdist.earth(as.matrix(sib_dist[,c('fish_indiv1_lon', 'fish_indiv1_lat')]), as.matrix(sib_dist[,c('fish_indiv2_lon', 'fish_indiv2_lat')]), miles=FALSE, R=6371)
-istal.packages("fortunes")
-install.packages("fortunes")
-alldists <- rdist.earth(as.matrix(sib_dist[,c('fish_indiv1_lon', 'fish_indiv1_lat')]), as.matrix(sib_dist[,c('fish_indiv2_lon', 'fish_indiv2_lat')]), miles=FALSE, R=6371)
-install.packages("earth")
-alldists <- rdist.earth(as.matrix(sib_dist[,c('fish_indiv1_lon', 'fish_indiv1_lat')]), as.matrix(sib_dist[,c('fish_indiv2_lon', 'fish_indiv2_lat')]), miles=FALSE, R=6371)
-library(earth)
-alldists <- rdist.earth(as.matrix(sib_dist[,c('fish_indiv1_lon', 'fish_indiv1_lat')]), as.matrix(sib_dist[,c('fish_indiv2_lon', 'fish_indiv2_lat')]), miles=FALSE, R=6371)
-library(dplyr)
-install.packages("rdist")
-alldists <- rdist.earth(as.matrix(sib_dist[,c('fish_indiv1_lon', 'fish_indiv1_lat')]), as.matrix(sib_dist[,c('fish_indiv2_lon', 'fish_indiv2_lat')]), miles=FALSE, R=6371)
-library(rdist)
-alldists <- rdist.earth(as.matrix(sib_dist[,c('fish_indiv1_lon', 'fish_indiv1_lat')]), as.matrix(sib_dist[,c('fish_indiv2_lon', 'fish_indiv2_lat')]), miles=FALSE, R=6371)
-install.packages("spectralGP")
-alldists <- rdist.earth(as.matrix(sib_dist[,c('fish_indiv1_lon', 'fish_indiv1_lat')]), as.matrix(sib_dist[,c('fish_indiv2_lon', 'fish_indiv2_lat')]), miles=FALSE, R=6371)
-library(spectralGP)
-alldists <- rdist.earth(as.matrix(sib_dist[,c('fish_indiv1_lon', 'fish_indiv1_lat')]), as.matrix(sib_dist[,c('fish_indiv2_lon', 'fish_indiv2_lat')]), miles=FALSE, R=6371)
-head(trimmed_fish_meta)
-trimmed_fish_meta %>%
-fish_c6 <- data.table(fish_indiv_1 = 'fish_indiv', fish_indiv_2 ='fish_indiv', fish_indiv1_lon = 'lon', fish_indiv1_lat = 'lat', fish_indiv2_lon = 'lon' fish_indiv2_lat = 'lat')
-fish_c6 <- data.table(fish_indiv_1 = 'fish_indiv', fish_indiv_2 ='fish_indiv', fish_indiv1_lon = 'lon', fish_indiv1_lat = 'lat', fish_indiv2_lon = 'lon', fish_indiv2_lat = 'lat')
-load(dplyr)
-library(dplyr)
-fish_c6 <- data.table(fish_indiv_1 = 'fish_indiv', fish_indiv_2 ='fish_indiv', fish_indiv1_lon = 'lon', fish_indiv1_lat = 'lat', fish_indiv2_lon = 'lon', fish_indiv2_lat = 'lat')
+indiv_fish_dist <- trimmed_fish_meta %>%#
+mutate(fish_indiv_1=fish_indiv) %>%#
+mutate(fish_indiv1_lat=lat) %>%#
+mutate(fish_indiv1_lon=lon)#
+head(indiv_fish_dist)
 library(tidyverse)
-fish_c6 <- data.table(fish_indiv_1 = 'fish_indiv', fish_indiv_2 ='fish_indiv', fish_indiv1_lon = 'lon', fish_indiv1_lat = 'lat', fish_indiv2_lon = 'lon', fish_indiv2_lat = 'lat')
-head(trimmed_fish_meta)
-trimmed_fish_meta %>%
-fish_c6 <- data.frame(fish_indiv_1 = 'fish_indiv', fish_indiv_2 ='fish_indiv', fish_indiv1_lon = 'lon', fish_indiv1_lat = 'lat', fish_indiv2_lon = 'lon', fish_indiv2_lat = 'lat')
-fish_c6 <- data.frame(fish_indiv_1 = 'fish_indiv', fish_indiv_2 ='fish_indiv', fish_indiv1_lon = 'lon', fish_indiv1_lat = 'lat', fish_indiv2_lon = 'lon', fish_indiv2_lat = 'lat')
-head(fish_c6)
-fish_c6 <- data.frame(fish_indiv_1 = fish_indiv, fish_indiv_2 =fish_indiv, fish_indiv1_lon = lon, fish_indiv1_lat = lat, fish_indiv2_lon = lon, fish_indiv2_lat = lat)
-trimmed_fish_meta %>%
-fish_c6 <- data.frame(fish_indiv_1 = fish_indiv, fish_indiv_2 =fish_indiv, fish_indiv1_lon = lon, fish_indiv1_lat = lat, fish_indiv2_lon = lon, fish_indiv2_lat = lat)
-head(trimmed_fish_meta)
-fish_c6 <- data.frame(fish_indiv_1 = trimmed_fish_meta,fish_indiv, fish_indiv_2 = trimmed_fish_meta,fish_indiv, fish_indiv1_lon = trimmed_fish_meta,lon, fish_indiv1_lat = trimmed_fish_meta,lat, fish_indiv2_lon = trimmed_fish_meta,lon, fish_indiv2_lat = trimmed_fish_meta,lat)
-fish_c6 <- data.frame(fish_indiv_1 = trimmed_fish_meta,'fish_indiv', fish_indiv_2 = trimmed_fish_meta,'fish_indiv', fish_indiv1_lon = trimmed_fish_meta,'lon', fish_indiv1_lat = trimmed_fish_meta,'lat', fish_indiv2_lon = trimmed_fish_meta,'lon', fish_indiv2_lat = trimmed_fish_meta,'lat')
-head(fish_c6)
-head(fish_c6)
-head(trimmed_fish_meta)
-trimmed_fish_meta %>%
-head(fish_c6)
-head(fish_c6)
-head(trimmed_fish_meta)
-head(fish_indiv)
-head('fish_indiv')
-head(<chr>)
-head('<chr>')
-head(trimmed_fish_meta)
-indiv_fish_c6 <- trimmed_fish_meta %>%#
-+ select(fish_indiv, fish_indiv, lon, lat, lon, lat)#
->
+indiv_fish_dist <- trimmed_fish_meta %>%#
+mutate(fish_indiv_1=fish_indiv) %>%#
+mutate(fish_indiv1_lat=lat) %>%#
+mutate(fish_indiv1_lon=lon)#
+head(indiv_fish_dist)
 trimmed_fish_meta <- fish_meta %>%#
-+ select(fish_indiv, lat, lon)#
-> head(trimmed_fish_meta)
-trimmed_fish_meta <- fish_meta %>%select(fish_indiv, lat, lon)
-trimmed_fish_meta <- fish_meta %>% select(fish_indiv, lat, lon)
+select(fish_indiv, lat, lon)#
 head(trimmed_fish_meta)
-indiv_fish_dist <- trimmed_fish_meta %>%
-mutate(fish_indiv=fish_indiv_1) %>%
-mutate(lat=fish_indiv1_lat) %>%
-mutate(lon=fish_indiv1_lon)
-rlang::last_error()
-rlang::last_trace()
-indiv_fish_dist <- trimmed_fish_meta %>%
-mutate(fish_indiv=fish_indiv_1) %>%
-mutate(lat=fish_indiv1_lat) %>%
-mutate(lon='fish_indiv1_lon')
-head(trimmed_meta_fish)
+fish_pairs <- combn(trimmed_fish_meta, 2903, FUN = NULL, simplify = TRUE)
+length(trimmed_fish_meta)
+fish_pairs <- combn(trimmed_fish_meta, 3, FUN = NULL, simplify = TRUE)
+head(fish_pairs)
+fish_pairs_unique <- expand.grid(trimmed_fish_meta,trimmed_fish_meta)
+head(fish_pairs_unique)
 head(trimmed_fish_meta)
-indiv_fish_dist <- trimmed_fish_meta %>%
-mutate(fish_indiv_1=fish_indiv) %>%
-mutate(fish_indiv1_lat=lat) %>%
-mutate(fish_indiv1_lon=lon)
+fish_pairs_unique <- expand(trimmed_fish_meta,trimmed_fish_meta)
+head(fish_pairs_unique)
+length(fish_pairs_unique)
+width(fish_pairs_unique)
+trimmed_fish_meta %>%
+expand(fish_indiv)
+trimmed_fish_meta %>%
+expand(fish_indiv,fish_indiv)
+trimmed_fish_meta %>%
+expand(fish_indiv,lat,lon)
+trimmed_fish_meta %>%
+expand(fish_indiv, lat, lon)
+trimmed_fish_meta %>%
+expand(fish_indiv)
+head(trimmed_fish_meta)
+length(trimmed_fish_meta)
+nrow(trimmed_fish_meta)
+head(fish_meta)
+head(trimmed_fish_meta)
+get(wd)
+getwd()
+gstwd(/Users/connormeenan/Desktop/6_25_2020)
+gstwd("/Users/connormeenan/Desktop/6_25_2020")
+setwd("/Users/connormeenan/Desktop/6_25_2020")
+readRDS(upper_tri_alldists.rds)
+head(upper_tri_alldists)
+getwd()
+readRDS(upper_tri_alldits.rds)
+readRDS('upper_tri_alldits.rds')
+setwd("/Users/connormeenan/Desktop/Sibling-Dispersal")
+fish_pairs_unique <- expand.grid(trimmed_fish_meta,trimmed_fish_meta)
+length(fish_pairs_unique)
+nrow(fish_pairs_unique)
+head(trimmed_fish_meta)
+indiv_fish_dist <- trimmed_fish_meta %>%#
+mutate(fish_indiv_1=fish_indiv) %>%#
+mutate(fish_indiv1_lat=lat) %>%#
+mutate(fish_indiv1_lon=lon)#
+head(indiv_fish_dist)#
+#
+indiv_fish_dist <- indiv_fish_dist %>%#
+rename(fish_indiv_2 = fish_indiv) %>%#
+rename(fish_indiv2_lat = lat) %>%#
+rename(fish_indiv2_lon = lon)#
+head(indiv_fish_dist)#
+#
+indiv_fish_dist_reordered <- indiv_fish_dist[c(4,1,5,6,2,3)]#
+head(indiv_fish_dist_reordered)#
+#
+indiv_fish_dist <- indiv_fish_dist_reordered#
 head(indiv_fish_dist)
-indiv_fish_dist %>%
-rename(fish_indiv_2 = fish_indiv) %>%
-rename(fish_indiv2_tat = lat) %>%
-rename(fish_indiv2_lon = lon) %>%
-head()
-indiv_fish_dist %>%
-rename(fish_indiv2_lat = fish_indiv2_tat) %>%
-head()
-head(indiv_fish_dist)
-indiv_fish_dist <- indiv_fish_dist %>%
-rename(fish_indiv_2 = fish_indiv) %>%
-rename(fish_indiv2_lat = lat) %>%
-rename(fish_indiv2_lon = lon)
-head(indiv_fish_dist)
-indiv_fish_dist_reordered <- indiv_fish_dist[c(4,1,5,6,2,3)]
-head(indiv_fish_dist_reordered)
-indiv_fish_dist <- indiv_fish_dist_reordered
-head(indiv_fish_dist)
-saveRDS(indiv_fish_dist, "indiv_fish_dist.rds")
-#calculate the distance #
-alldists <- rdist.earth(as.matrix(indiv_fish_dist[,c('fish_indiv1_lon', 'fish_indiv1_lat')]), as.matrix(sib_dist[,c('fish_indiv2_lon', 'fish_indiv2_lat')]), miles=FALSE, R=6371)
-#calculate the distance #
 alldists <- rdist.earth(as.matrix(indiv_fish_dist[,c('fish_indiv1_lon', 'fish_indiv1_lat')]), as.matrix(indiv_fish_dist[,c('fish_indiv2_lon', 'fish_indiv2_lat')]), miles=FALSE, R=6371)
-head(alldists)
-head(indiv_fish_dist)
-indiv_fish_dist$fish_km_between_fish1_fish2 <- diag(alldists)
-head(indiv_fish_dist)
-saveRDS(indiv_fish_dist, "indiv_fish_dist_with_alldists.rds")
-saveRDS(alldists, "alldists.rds")
-head(trimmed_meta_fish)
-trimmed_fish_meta <- fish_meta %>%
-select(fish_indiv, lat, lon)
-head(trimmed_meta_fish)
-head(trimmed_fish_meta)
-saveRDS(trimmed_fish_meta, "trimmed_fish_meta.rds")
-hist(indiv_fish_dist$fish_km_between_fish1_fish2)
+library(spectralgp)
+library(spectralGP)
+alldists <- rdist.earth(as.matrix(indiv_fish_dist[,c('fish_indiv1_lon', 'fish_indiv1_lat')]), as.matrix(indiv_fish_dist[,c('fish_indiv2_lon', 'fish_indiv2_lat')]), miles=FALSE, R=6371)
+install.packages('matrixcalc')#
+library(matrixcalc)#
+upper_tri_alldists <- upper.triangle(alldists)#
+head(upper_tri_alldists)
+hist(upper_tri_alldists)
