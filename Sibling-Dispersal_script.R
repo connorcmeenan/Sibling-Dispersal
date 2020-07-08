@@ -73,3 +73,17 @@ rename(fish_1 = Var1) %>%
 rename(fish_2 = Var2) %>%
 rename(dist_km = value)
 head(fish_pairs_df1)
+
+#turn matrix into df
+alldists <- readRDS('alldists_copy.rds')
+fish_pairs_df <- as.data.frame(t(alldists))
+head(fish_pairs_df)
+
+# name columns and add column with row names
+trimmed <- readRDS('trimmed_fish_meta_copy.rds')
+id_vector <- pull(trimmed, fish_indiv)
+named_columns <- fish_pairs_df
+names(named_columns) <- id_vector
+head(named_columns)
+named_rows_columns <- named_columns
+named_rows_columns <- add_column(named_columns, id_vector, .before = "985153000371280")
