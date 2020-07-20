@@ -55,28 +55,23 @@ president<-read.csv("/Users/Connor/Desktop/President data _problem 2.108_.csv",h
 help.start()
 getwd()
 setwd("/Users/connormeenan/desktop/Sibling-Dispersal"
-library(dplyr)
-alldists <- readRDS('alldists_copy.rds')
+libraray(tidyverse)
+library(tidyverse)
+library(gtools)
+library(spectralGP)
 getwd()
 setwd("/Users/connormeenan/desktop/Sibling-Dispersal/data")
-alldists <- readRDS('alldists_copy.rds')
-fish_pairs_df <- as.data.frame(t(alldists))
+trimmed <- readRDS(trimmed_fish_meta)
+trimmed <- readRDS('trimmed_fish_meta')
+trimmed <- readRDS('trimmed_fish_meta_copy')
 trimmed <- readRDS('trimmed_fish_meta_copy.rds')
 id_vector <- pull(trimmed, fish_indiv)
-named_columns <- fish_pairs_df %>%
-h
-named_columns <- fish_pairs_df
-names(named_columns) <- id_vector
-head(named_columns)
-named_rows_&_columns <- named_columns
-named_rows_columns <- named_columns
-add_column(named_rows_columns, id_vector, .before = 985153000371280, .after = NULL)
-install.packages('tibble')
-library(tibble)
-add_column(named_rows_columns, id_vector, .before = 985153000371280, .after = NULL)
-library(tibble)
-add_column(named_rows_columns, id_vector, .before = 985153000371280, .after = NULL)
-add_column(named_rows_columns, id_vector, .before = 985153000371280, .after = NULL)
-library(tidyverse)
-add_column(named_rows_columns, id_vector, .before = 985153000371280, .after = NULL)
-add_column(named_rows_columns, id_vector, .before = 985153000371280, .after = NULL)
+named <- readRDS('named_rows_columns.rds')
+gathered <- gather(named, 'fish_1', "fish_2", 1:2903)
+head(gathered)
+tail(gathered)
+gathered
+removed <- gathered[-c(1:2903)]
+head(removed)
+removed <- gathered[-c(1:2903), ]
+head(removed)

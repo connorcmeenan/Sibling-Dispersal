@@ -87,3 +87,9 @@ names(named_columns) <- id_vector
 head(named_columns)
 named_rows_columns <- named_columns
 named_rows_columns <- add_column(named_columns, id_vector, .before = "985153000371280")
+
+# make all possible combos of indiv fish
+install.packages('gtools')
+library(gtools)
+permutated_fish_no_reps <- permutations(n=2903, r=2, v=id_vector)
+no_reps_fish_pairs <- as.data.frame(t(permutated_fish_no_reps))
