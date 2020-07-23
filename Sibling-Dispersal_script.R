@@ -93,3 +93,38 @@ install.packages('gtools')
 library(gtools)
 permutated_fish_no_reps <- permutations(n=2903, r=2, v=id_vector)
 no_reps_fish_pairs <- as.data.frame(t(permutated_fish_no_reps))
+
+anti_join(fish_dists, sib_dist, by=c(id_vector="sib1_fish_indiv", fish_2id="sib2_fish_indiv "))
+#make correct df
+gathered_2 <- gather(fish_dists, 2:2904, key="fish_2id", value="id")
+named_fish_dists <- gathered_2 %>%
+rename(fish_1id = id_vector) %>%
+rename(distance_km = id)
+head(named_fish_dists)
+
+#remove fish compared to self
+filtered_fish_dist <- named_fish_dist %>%
+filter(fish_1id != fish_2id)
+head(filtered_fish_dist)
+
+#remove "duplicated" fish
+
+
+#remove sibling pairs
+sib_dist <- readRDS('sib_dist.rds')
+df_wo_sibs <- anti_join(filtered_fish_dist, sib_dist, by=c(fish_1id="sib1_fish_indiv", fish_2id="sib2_fish_indiv"))
+
+#remove duplicates using the matrix with deleted upper triangle
+upper_triag <- readRDS(upper_tri_alldists.rds)
+upper_triag <- readRDS('upper_tri_alldists.rds')
+upper_triag_df <- as.data.frame(t(upper_triag))
+trimmed <- readRDS('trimmed_fish_meta_copy.rds')
+id_vector <- pull(trimmed, fish_indiv)
+named_upper_triag <- upper_triag_df
+names(named_upper_triag) <- id_vector
+head(named_upper_triag)
+named_rows_columns_upper_triag <- named_upper_triag
+upper_triag_named <- add_column(named_rows_columns_upper_triag, id_vector, .before = "985153000371280")
+gathered_upper <- gather(upper_triag_named, 2:2904, key="fish2_id", value="distance_km")
+fish_no_duplicates <- subset(filtered_upper, distance_km!=0)
+final_df_missing_13k_rows <- anti_join(fish_no_duplicates, sib_dist, by=c(fish1_id="sib1_fish_indiv", fish2_id="sib2_fish_indiv"))
