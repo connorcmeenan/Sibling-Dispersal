@@ -126,5 +126,33 @@ head(named_upper_triag)
 named_rows_columns_upper_triag <- named_upper_triag
 upper_triag_named <- add_column(named_rows_columns_upper_triag, id_vector, .before = "985153000371280")
 gathered_upper <- gather(upper_triag_named, 2:2904, key="fish2_id", value="distance_km")
+named_fish_dists <- gathered_upper %>%
+rename(fish1_id = id_vector)
+filtered_fish_dist <- gathered_upper %>%
+filter(fish_1id != fish_2id)
 fish_no_duplicates <- subset(filtered_upper, distance_km!=0)
 final_df_missing_13k_rows <- anti_join(fish_no_duplicates, sib_dist, by=c(fish1_id="sib1_fish_indiv", fish2_id="sib2_fish_indiv"))
+
+
+#remove duplicates like above but without losing the extra 13k rows
+library(tidyverse)
+library(gtools)
+library(matrixcalc)
+alldists <- readRDS('alldists_copy')
+alldists <- readRDS('alldists_copy.rds')
+alldists_df <- as.data.frame(t(alldists))
+alldists_df[alldists_df==0]<-999
+subs_matrix <- data.matrix(alldists_df)
+upper_triag <- upper.triangle(subs_matrix)
+upper_triag_df <- as.data.frame(t(upper_triag))
+trimmed <- readRDS('trimmed_fish_meta_copy.rds')
+id_vector <- pull(trimmed, fish_indiv)
+names(upper_triag_df) <- id_vector
+upper_triag_df <- add_column(upper_triag_df, id_vector, .before = "985153000371280")
+gathered_upper <- gather(upper_triag_df, 2:2904, key="fish2_id", value="distance_km")
+named <- gathered_upper %>%
+rename(fish1_id = id_vector)
+filtered <- named %>%
+filter(fish1_id != fish2_id)
+no_duplicates <- subset(filtered, distance_km!=0)
+all_fish_pairs_distances <- <- anti_join(no_duplicates, sib_dist, by=c(fish1_id="sib1_fish_indiv", fish2_id="sib2_fish_indiv"))
