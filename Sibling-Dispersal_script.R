@@ -94,17 +94,16 @@ library(gtools)
 permutated_fish_no_reps <- permutations(n=2903, r=2, v=id_vector)
 no_reps_fish_pairs <- as.data.frame(t(permutated_fish_no_reps))
 
-anti_join(fish_dists, sib_dist, by=c(id_vector="sib1_fish_indiv", fish_2id="sib2_fish_indiv "))
 #make correct df
-gathered_2 <- gather(fish_dists, 2:2904, key="fish_2id", value="id")
+gathered_2 <- gather(fish_dists, 2:2904, key="fish2_id", value="id")
 named_fish_dists <- gathered_2 %>%
-rename(fish_1id = id_vector) %>%
+rename(fish1_id = id_vector) %>%
 rename(distance_km = id)
 head(named_fish_dists)
 
 #remove fish compared to self
-filtered_fish_dist <- named_fish_dist %>%
-filter(fish_1id != fish_2id)
+filtered_fish_dist <- named_fish_dists %>%
+filter(fish1_id != fish2_id)
 head(filtered_fish_dist)
 
 #remove "duplicated" fish
