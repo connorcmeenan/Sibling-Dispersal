@@ -156,3 +156,6 @@ filter(fish1_id != fish2_id)
 no_duplicates <- subset(filtered, distance_km!=0)
 no_duplicates[no_duplicates==999]<-0
 all_fish_pairs_distances <- <- anti_join(no_duplicates, sib_dist, by=c(fish1_id="sib1_fish_indiv", fish2_id="sib2_fish_indiv"))
+
+#make histogram
+hist(all_fish_pairs_distances$distance_km)
