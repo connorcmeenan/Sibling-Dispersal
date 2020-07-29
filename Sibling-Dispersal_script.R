@@ -157,5 +157,35 @@ no_duplicates <- subset(filtered, distance_km!=0)
 no_duplicates[no_duplicates==999]<-0
 all_fish_pairs_distances <- <- anti_join(no_duplicates, sib_dist, by=c(fish1_id="sib1_fish_indiv", fish2_id="sib2_fish_indiv"))
 
-#make histogram
-hist(all_fish_pairs_distances$distance_km)
+#make histogram with fish reps
+sibs <- readRDS('sib_dist.rds')
+no_sibs <- anti_join(filtered, sibs, by=c(fish1_id="sib1_fish_indiv", fish2_id="sib2_fish_indiv"))
+trimmed_sibs <- sibs %>%
+select(sib1_fish_indiv, sib2_fish_indiv, dist_km)
+sibling_distances <- trimmed_sibs %>%
+select(dist_km)
+unrelated_distances <- no_sibs %>%
+select(distance_km)
+unrelated_distances$distances <- 'unrelated_fish_pairs'
+sibling_distances$distances <- 'sibling_fish_pairs'
+Distances <- rbind(sibling_distances, unrelated_distances)
+ggplot(Distances, aes(distance_km, fill = distances)) + geom_histogram(alpha = 0.5, position = 'identity')
+
+#make histogram with sampled data
+sibs <- readRDS('sib_dist.rds')
+trimmed_sibs <- sibs %>%
+select(sib1_fish_indiv, sib2_fish_indiv, dist_km)
+sibling_distances <- trimmed_sibs %>%
+select(dist_km)
+sibling_distances <- sibling_distances %>%
+rename(distance_km = "dist_km")
+pairs_no_rep <- read.csv(file = "PairsWithNoRep.csv")
+no_reps <- pairs_no_rep %>%
+select(distance_km)
+no_reps$distances <- 'unrelated_fish_pairs'
+sibling_distances$distances <- 'sibling_fish_pairs'
+Distances <- rbind(sibling_distances, no_reps)
+dist_hist_1 <- ggplot(Distances, aes(distance_km, fill = distances)) + geom_histogram(alpha = 0.5, position = 'identity') + scale_fill_manual(values=c("grey20", "grey60")) + theme_bw()
+pdf("first_fish_dist_hist")
+print(dist_hist_1)
+dev.off()
