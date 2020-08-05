@@ -189,3 +189,9 @@ dist_hist_1 <- ggplot(Distances, aes(distance_km, fill = distances)) + geom_hist
 pdf("first_fish_dist_hist")
 print(dist_hist_1)
 dev.off()
+
+#find NA pairs in Distances df
+NA_Distances <- Distances[rowSums(is.na(Distances)) > 0,]
+
+#make boxplot
+box_dist_1 <- ggplot(data = Distances, aes(x=distances, y=distance_km)) + geom_boxplot(aes(fill=distances)) + scale_fill_manual(values=c("grey20", "grey60")) + theme_bw()
