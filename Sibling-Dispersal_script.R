@@ -195,3 +195,10 @@ NA_Distances <- Distances[rowSums(is.na(Distances)) > 0,]
 
 #make boxplot
 box_dist_1 <- ggplot(data = Distances, aes(x=distances, y=distance_km)) + geom_boxplot(aes(fill=distances)) + scale_fill_manual(values=c("grey20", "grey60")) + theme_bw()
+
+#turn Distance df in RDS file
+saveRDS(Distances, "combined_distances_df.rds")
+
+#mann whittney u test
+mann_whitney_test_1 <- wilcox.test(distance_km ~ distances, data=Distances)
+mann_whitney_test_1
