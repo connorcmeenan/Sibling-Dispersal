@@ -202,3 +202,49 @@ saveRDS(Distances, "combined_distances_df.rds")
 #mann whittney u test
 mann_whitney_test_1 <- wilcox.test(distance_km ~ distances, data=Distances)
 mann_whitney_test_1
+
+#left joined tables
+sibs_df <- select(trimmed_fish_no_na, -c(sib2_year))
+kernel <- read.csv('kernel_copy.csv')
+left_joined <- left_join(sibs_df, kernel, by = 'year')
+joined <- left_joined[, c(1, 3, 4, 2, 5, 6, 7)]
+
+#make r2 values and summary
+#mean
+model_mean <- lm(dist_km~MeanDispDist, data = joined)
+meansumm <- summary(model_mean)
+r2mean = meansumm$adj.r.squared
+mean.p = meansumm$coefficients[2,4]
+#median
+model_median <- lm(dist_km~MedianDispDist, data = joined)
+mediansumm <- summary(model_median)
+r2median = mediansumm$adj.r.squared
+median.p = mediansumm$coefficients[2,4]
+#90 retained
+model_retained <- lm(dist_km~Dist90Retained, data = joined)
+retainedsumm <- summary(model_retained)
+r2retained = retainedsumm$adj.r.squared
+retained.p = retainedsumm$coefficients[2,4]
+
+#make correlation plots
+#mean
+mean_plot_named <- plot(joined$MeanDispDist, joined$dist_km, xlab = 'Dispersal Distances, km', ylab = 'Distance Between Siblings, km')
+abline(model_mean)
+rp = vector('expression',2)
+rp[1] = substitute(expression(italic(R)^2 == MYVALUE), list(MYVALUE = format(r2mean,dig=3)))[2]
+rp[2] = substitute(expression(italic(p) == MYOTHERVALUE), list(MYOTHERVALUE = format(mean.p, digits = 2)))[2]
+legend('topright', legend = rp, bty = 'n')
+#median
+median_plot_named <- plot(joined$MedianDispDist, joined$dist_km, xlab = 'Median Dispersal Distances, km', ylab = 'Distance Between Siblings, km')
+abline(model_median)
+rp2 = vector('expression',2)
+rp2[1] = substitute(expression(italic(R)^2 == MYVALUE), list(MYVALUE = format(r2median,dig=3)))[2]
+rp2[2] = substitute(expression(italic(p) == MYOTHERVALUE), list(MYOTHERVALUE = format(median.p, digits = 2)))[2]
+legend('topright', legend = rp2, bty = 'n')
+#retained
+retained_plot_named <- plot(joined$Dist90Retained, joined$dist_km, xlab = '90 Retained Dispersal Distances, km', ylab = 'Distance Between Siblings, km')
+abline(model_retained)
+rp3 = vector('expression',2)
+rp3[1] = substitute(expression(italic(R)^2 == MYVALUE), list(MYVALUE = format(r2retained,dig=3)))[2]
+rp3[2] = substitute(expression(italic(p) == MYOTHERVALUE), list(MYOTHERVALUE = format(retained.p, digits = 2)))[2]
+legend('topright', legend = rp3, bty = 'n')
