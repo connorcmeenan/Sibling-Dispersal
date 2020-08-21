@@ -204,9 +204,13 @@ mann_whitney_test_1 <- wilcox.test(distance_km ~ distances, data=Distances)
 mann_whitney_test_1
 
 #left joined tables
-sibs_df <- select(trimmed_fish_no_na, -c(sib2_year))
+sibs <- readRDS('sib_dist.rds')
+trimmed_sibs <- sibs %>%
+select(sib1_fish_indiv, sib2_fish_indiv,dist_km, year)
+sibs_trimmed_no_na <- trimmed_sibs %>% filter(!is.na(dist_km))
 kernel <- read.csv('kernel_copy.csv')
-left_joined <- left_join(sibs_df, kernel, by = 'year')
+left_joined <- left_join(sibs_trimmed_no_na, kernel, by = 'year')
+saveRDS(joined, "joined_sibs_kernels")
 joined <- left_joined[, c(1, 3, 4, 2, 5, 6, 7)]
 
 #make r2 values and summary
@@ -243,6 +247,28 @@ rp2[2] = substitute(expression(italic(p) == MYOTHERVALUE), list(MYOTHERVALUE = f
 legend('topright', legend = rp2, bty = 'n')
 #retained
 retained_plot_named <- plot(joined$Dist90Retained, joined$dist_km, xlab = '90 Retained Dispersal Distances, km', ylab = 'Distance Between Siblings, km')
+abline(model_retained)
+rp3 = vector('expression',2)
+rp3[1] = substitute(expression(italic(R)^2 == MYVALUE), list(MYVALUE = format(r2retained,dig=3)))[2]
+rp3[2] = substitute(expression(italic(p) == MYOTHERVALUE), list(MYOTHERVALUE = format(retained.p, digits = 2)))[2]
+legend('topright', legend = rp3, bty = 'n')
+
+#edited graphs
+box_6 <- ggplot(data = distances, aes(x=distances, y=distance_km)) + geom_boxplot(aes(fill=distances)) + scale_fill_manual(values=c("grey50", "grey80"), labels=c('Sibling fish pairs', 'Unrelated fish pairs'), name="") + theme_bw() + ylim(0,30) + ylab("Distance between individuals (km)") + xlab('Fish pairs')
+hist_8 <- ggplot(distances, aes(distance_km, fill = distances)) + geom_histogram(binwidth = 0.5, alpha = 0.5, position = 'identity') + scale_fill_manual(values=c("grey0", "grey40"), name="", labels=c('Sibling fish pairs', 'Unrelated fish pairs')) + ylab("Frequency") + xlab("Distance between individuals (km)") + xlim(0,30)
+mean_plot_named <- plot(joined$MeanDispDist, joined$dist_km, xlab = 'Mean dispersal distances (km)', ylab = 'Distance between siblings (km)')
+abline(model_mean)
+rp = vector('expression',2)
+rp[1] = substitute(expression(italic(R)^2 == MYVALUE), list(MYVALUE = format(r2mean,dig=3)))[2]
+rp[2] = substitute(expression(italic(p) == MYOTHERVALUE), list(MYOTHERVALUE = format(mean.p, digits = 2)))[2]
+legend('topright', legend = rp, bty = 'n')
+median_plot_named <- plot(joined$MedianDispDist, joined$dist_km, xlab = 'Median dispersal distances (km)', ylab = 'Distance between siblings (km)')
+abline(model_median)
+rp2 = vector('expression',2)
+rp2[1] = substitute(expression(italic(R)^2 == MYVALUE), list(MYVALUE = format(r2median,dig=3)))[2]
+rp2[2] = substitute(expression(italic(p) == MYOTHERVALUE), list(MYOTHERVALUE = format(median.p, digits = 2)))[2]
+legend('topright', legend = rp2, bty = 'n')
+retained_plot_named <- plot(joined$Dist90Retained, joined$dist_km, xlab = 'Distance of 0.90 retention (km)', ylab = 'Distance between siblings (km)')
 abline(model_retained)
 rp3 = vector('expression',2)
 rp3[1] = substitute(expression(italic(R)^2 == MYVALUE), list(MYVALUE = format(r2retained,dig=3)))[2]
