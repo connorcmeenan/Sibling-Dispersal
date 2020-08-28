@@ -274,3 +274,6 @@ rp3 = vector('expression',2)
 rp3[1] = substitute(expression(italic(R)^2 == MYVALUE), list(MYVALUE = format(r2retained,dig=3)))[2]
 rp3[2] = substitute(expression(italic(p) == MYOTHERVALUE), list(MYOTHERVALUE = format(retained.p, digits = 2)))[2]
 legend('topright', legend = rp3, bty = 'n')
+
+#Violin plot
+violin_1 <- ggplot(data = distances, aes(x=distances, y=distance_km)) + geom_violin(aes(fill=distances)) + scale_fill_manual(values=c("grey50", "grey80"), labels=c('Sibling fish pairs', 'Unrelated fish pairs'), name="") + theme_bw() + ylim(0,30) + ylab("Distance between individuals (km)") + xlab('Fish pairs')
