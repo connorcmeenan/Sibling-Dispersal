@@ -216,3 +216,10 @@ plot(as.Date(halfsibs_yearmatch$date_sib1)-as.Date(halfsibs_yearmatch$date_sib2)
 sibs_2013 <- sib_dist %>% filter(sib1_year==2013)
 halfsibs_2013 <- halfsibs_yearmatch %>% filter(year_sib1==2013)
 po_2013 <- po_dist %>% filter(offs_year==2013)
+
+plot(ecdf(po_2013$dist_par_km),cex=0,lwd=2,col="purple",main = "",xlab="Distance")
+plot(ecdf(sibs_2013$dist_km),cex=0,lwd=2,col="red",add=T)
+plot(ecdf(halfsibs_2013$distance),cex=0,lwd=2,col="blue",add=T)
+
+
+
