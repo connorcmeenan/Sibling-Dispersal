@@ -90,8 +90,10 @@ dev.off()
 violin_1 <- ggplot(data = Distances, aes(x=distances, y=distance_km)) + geom_violin(aes(fill=distances)) + scale_fill_manual(values=c("grey50", "grey80","grey20", "grey60"), labels=c('Half-Sibling Pairs','Parent-Offspring Pairs','Sibling fish pairs', 'Unrelated fish pairs'), name="") + theme_bw() + ylim(0,30) + ylab("Distance between individuals (km)") + xlab('Fish pairs')
 print(violin_1)
 
-#### simulating a distribution of halfsib distances under 
-### randomly select 2 PO distances and 
+#### simulating a distribution of halfsib distances under random dispersal
+### randomly select 2 PO distances
+### add or subtract (equal probability) smaller from larger
+### repeat for the number of observed half-sib pairs
 
 halfsib_sim_dist=vector()
 
@@ -104,11 +106,16 @@ for (i in 1:length(halfsibs_noNA$distance)){
   halfsib_sim_dist[i]=dists_comp
 }
 
+### compare simulated distribution to observed distribution
+
 par(mfrow=c(1,2))
 plot(density(halfsibs_noNA$distance))
 plot(density(halfsib_sim_dist))
 
 ks.test(halfsibs_noNA$distance,halfsib_sim_dist)
+
+### some of the simulated values are larger than the extent of the study area / maximum observed distance
+## for now just remove these, but there might be a better solution
 
 halfsib_sim_dist_trunc=halfsib_sim_dist[which(halfsib_sim_dist<max(halfsibs_noNA$distance))]
 
@@ -118,7 +125,7 @@ plot(density(halfsib_sim_dist_trunc))
 
 ks.test(halfsibs_noNA$distance,halfsib_sim_dist_trunc)
 
-
+### generate a random distribution of full-sibs using the same methodology
 
 fullsib_sim_dist=vector()
 
@@ -138,7 +145,7 @@ plot(density(fullsib_sim_dist))
 ks.test(na.omit(sib_dist$dist_km),fullsib_sim_dist)
 
 
-####
+#### just generate 500 random sibling distances and remove any that are > maximum PO distance
 
 n500_sim_dist=vector()
 
@@ -154,11 +161,9 @@ for (i in 1:500){
 n500_sim_dist_trunc=n500_sim_dist[which(n500_sim_dist<max(po_dist$dist_par_km))]
 
 
+### plot empirical cumulative distribution functions
 
-
-###
-
-
+par(mfrow=c(1,1))
 
 plot(ecdf(pairs_no_rep$distance_km),main = "",xlab="Distance",cex=0,lwd=2,col="black")
 plot(ecdf(po_dist$dist_par_km),cex=0,lwd=2,col="purple",add=T)
@@ -181,12 +186,8 @@ ks.test(po_dist$dist_par_km,n500_sim_dist_trunc)
 ks.test(halfsibs_noNA$distance,pairs_no_rep$distance_km)
 
 
+##### looking at difference in capture dates and differences in size
 
-
-
-
-
-#####
 as.Date(halfsibs_metadata$date_sib1)-as.Date(halfsibs_metadata$date_sib2)
 min(na.omit(as.vector(as.Date(halfsibs_metadata$date_sib1)-as.Date(halfsibs_metadata$date_sib2))))
 max(na.omit(as.vector(as.Date(halfsibs_metadata$date_sib1)-as.Date(halfsibs_metadata$date_sib2))))
@@ -197,6 +198,7 @@ min(na.omit(as.Date(sib_dist$sib1_date)-as.Date(sib_dist$sib2_date)))
 max(na.omit(as.Date(sib_dist$sib1_date)-as.Date(sib_dist$sib2_date)))
 plot(as.Date(sib_dist$sib1_date)-as.Date(sib_dist$sib2_date),sib_dist$sib1_size - sib_dist$sib2_size)
 
+### 
 
 
 
