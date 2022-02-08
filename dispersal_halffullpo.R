@@ -188,17 +188,31 @@ ks.test(halfsibs_noNA$distance,pairs_no_rep$distance_km)
 
 ##### looking at difference in capture dates and differences in size
 
-as.Date(halfsibs_metadata$date_sib1)-as.Date(halfsibs_metadata$date_sib2)
-min(na.omit(as.vector(as.Date(halfsibs_metadata$date_sib1)-as.Date(halfsibs_metadata$date_sib2))))
-max(na.omit(as.vector(as.Date(halfsibs_metadata$date_sib1)-as.Date(halfsibs_metadata$date_sib2))))
-plot(as.Date(halfsibs_metadata$date_sib1)-as.Date(halfsibs_metadata$date_sib2),halfsibs_metadata$size_sib1 - halfsibs_metadata$size_sib2)
+as.Date(halfsibs_noNA$date_sib1)-as.Date(halfsibs_noNA$date_sib2)
+min(na.omit(as.vector(as.Date(halfsibs_noNA$date_sib1)-as.Date(halfsibs_noNA$date_sib2))))
+max(na.omit(as.vector(as.Date(halfsibs_noNA$date_sib1)-as.Date(halfsibs_noNA$date_sib2))))
+plot(as.Date(halfsibs_noNA$date_sib1)-as.Date(halfsibs_noNA$date_sib2),halfsibs_noNA$size_sib1 - halfsibs_noNA$size_sib2, ylab="Size Difference",xlab="Capture Date Difference")
 
 as.Date(sib_dist$sib1_date)-as.Date(sib_dist$sib2_date)
 min(na.omit(as.Date(sib_dist$sib1_date)-as.Date(sib_dist$sib2_date)))
 max(na.omit(as.Date(sib_dist$sib1_date)-as.Date(sib_dist$sib2_date)))
-plot(as.Date(sib_dist$sib1_date)-as.Date(sib_dist$sib2_date),sib_dist$sib1_size - sib_dist$sib2_size)
+plot(as.Date(sib_dist$sib1_date)-as.Date(sib_dist$sib2_date),sib_dist$sib1_size - sib_dist$sib2_size, ylab="Size Difference",xlab="Capture Date Difference")
 
-### 
+### when were pairs first captured?
 
+plot(sib_dist$sib1_year,sib_dist$sib2_year)
 
+plot(halfsibs_noNA$year_sib1,halfsibs_noNA$year_sib2)
 
+halfsibs_yearmatch <- halfsibs_noNA %>% filter(year_sib1 == year_sib2)
+
+as.Date(halfsibs_yearmatch$date_sib1)-as.Date(halfsibs_yearmatch$date_sib2)
+min(na.omit(as.vector(as.Date(halfsibs_yearmatch$date_sib1)-as.Date(halfsibs_yearmatch$date_sib2))))
+max(na.omit(as.vector(as.Date(halfsibs_yearmatch$date_sib1)-as.Date(halfsibs_yearmatch$date_sib2))))
+plot(as.Date(halfsibs_yearmatch$date_sib1)-as.Date(halfsibs_yearmatch$date_sib2),halfsibs_yearmatch$size_sib1 - halfsibs_yearmatch$size_sib2, ylab="Size Difference",xlab="Capture Date Difference")
+
+### try to filter by year and plot ECDF
+
+sibs_2013 <- sib_dist %>% filter(sib1_year==2013)
+halfsibs_2013 <- halfsibs_yearmatch %>% filter(year_sib1==2013)
+po_2013 <- po_dist %>% filter(offs_year==2013)
