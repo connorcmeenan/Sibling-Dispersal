@@ -5,12 +5,12 @@ library(geosphere)
 
 ### read list of half-sib pairs
 
-halfsibs<-read.csv("~/Documents/GitHub/Sibling-Dispersal/data/Clownfish_HalfSib_data.csv")
+halfsibs<-read_csv("data/Clownfish_HalfSib_data.csv")
 head(halfsibs)
 
 ### import fish metadata
 
-metadata <-readRDS("~/Documents/GitHub/Sibling-Dispersal/data/fish_meta.rds")
+metadata <-readRDS("data/fish_meta.rds")
 
 ### filter half-sub pairs to include only pair with >95% probability
 
@@ -44,9 +44,9 @@ head(halfsibs_noNA)
 
 #### read in full-sibling and parent-offspring pair data 
 
-sib_dist <- readRDS("~/Documents/GitHub/Sibling-Dispersal/data/sib_dist.rds")
+sib_dist <- readRDS("data/sib_dist.rds")
 
-po_dist <- read.csv("~/Documents/GitHub/Sibling-Dispersal/data/parentage_results_allyears.csv")
+po_dist <- read.csv("data/parentage_results_allyears.csv")
 
 ## simple density plot of pairwise distance ditributions 
 plot(density(na.omit(sib_dist$dist_km)))
@@ -222,6 +222,48 @@ plot(ecdf(sibs_2013$dist_km),cex=0,lwd=2,col="red",add=T)
 plot(ecdf(halfsibs_2013$distance),cex=0,lwd=2,col="blue",add=T)
 
 ## plot other years
+
+sibs_2012 <- sib_dist %>% filter(sib1_year==2012)
+halfsibs_2012 <- halfsibs_yearmatch %>% filter(year_sib1==2012)
+po_2012 <- po_dist %>% filter(offs_year==2012)
+
+plot(ecdf(po_2012$dist_par_km),cex=0,lwd=2,xlim=c(0,30), col="purple",main = "",xlab="Distance")
+plot(ecdf(sibs_2012$dist_km),cex=0,lwd=2,col="red",add=T)
+plot(ecdf(halfsibs_2012$distance),cex=0,lwd=2,col="blue",add=T)
+
+sibs_2014 <- sib_dist %>% filter(sib1_year==2014)
+po_2014 <- po_dist %>% filter(offs_year==2014)
+
+plot(ecdf(po_2014$dist_par_km),cex=0,lwd=2,xlim=c(0,30),col="purple",main = "",xlab="Distance")
+plot(ecdf(sibs_2014$dist_km),cex=0,lwd=2,col="red",add=T)
+
+sibs_2015 <- sib_dist %>% filter(sib1_year==2015)
+halfsibs_2015 <- halfsibs_yearmatch %>% filter(year_sib1==2015)
+po_2015 <- po_dist %>% filter(offs_year==2015)
+
+plot(ecdf(po_2015$dist_par_km),cex=0,lwd=2,xlim=c(0,30),col="purple",main = "",xlab="Distance")
+plot(ecdf(sibs_2015$dist_km),cex=0,lwd=2,col="red",add=T)
+plot(ecdf(halfsibs_2015$distance),cex=0,lwd=2,col="blue",add=T)
+
+halfsibs_2016 <- halfsibs_yearmatch %>% filter(year_sib1==2016)
+po_2016 <- po_dist %>% filter(offs_year==2016)
+
+plot(ecdf(po_2016$dist_par_km),cex=0,lwd=2,xlim=c(0,30),col="purple",main = "",xlab="Distance")
+plot(ecdf(halfsibs_2016$distance),cex=0,lwd=2,col="blue",add=T)
+
+sibs_2017 <- sib_dist %>% filter(sib1_year==2017)
+halfsibs_2017 <- halfsibs_yearmatch %>% filter(year_sib1==2017)
+po_2017 <- po_dist %>% filter(offs_year==2017)
+
+plot(ecdf(po_2017$dist_par_km),cex=0,lwd=2,xlim=c(0,30),col="purple",main = "",xlab="Distance")
+plot(ecdf(sibs_2017$dist_km),cex=0,lwd=2,col="red",add=T)
+plot(ecdf(halfsibs_2017$distance),cex=0,lwd=2,col="blue",add=T)
+
+halfsibs_2018 <- halfsibs_yearmatch %>% filter(year_sib1==2018)
+po_2018 <- po_dist %>% filter(offs_year==2018)
+
+plot(ecdf(po_2018$dist_par_km),cex=0,lwd=2,xlim=c(0,30),col="purple",main = "",xlab="Distance")
+plot(ecdf(halfsibs_2018$distance),cex=0,lwd=2,col="blue",add=T)
 
 ## plot size differences by year
 
