@@ -221,5 +221,12 @@ plot(ecdf(po_2013$dist_par_km),cex=0,lwd=2,col="purple",main = "",xlab="Distance
 plot(ecdf(sibs_2013$dist_km),cex=0,lwd=2,col="red",add=T)
 plot(ecdf(halfsibs_2013$distance),cex=0,lwd=2,col="blue",add=T)
 
+## plot other years
+
+## plot size differences by year
+
+## think about what to do with half-sibs from different years
+
+## simulations using PO distances from same year as siblings
 
 
