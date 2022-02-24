@@ -271,4 +271,41 @@ plot(ecdf(halfsibs_2018$distance),cex=0,lwd=2,col="blue",add=T)
 
 ## simulations using PO distances from same year as siblings
 
+## did we have any parents of the full/half siblings in the PO dataset (for identifying dispersal origin)
 
+names(sib_dist)
+
+names(po_dist)
+
+po_dist$par_sample_id
+sib_dist$sib1_sample_id
+
+intersect(po_dist$offs_sample_id,sib_dist$sib1_sample_id)
+intersect(po_dist$offs_sample_id,sib_dist$sib2_sample_id)
+
+sib_po<-intersect(po_dist$offs_sample_id,c(sib_dist$sib1_sample_id,sib_dist$sib2_sample_id))
+
+po_dist$offs_sample_id %in% sib_po
+
+po_dist$par_sample_id[po_dist$offs_sample_id %in% sib_po]
+
+metadata$lat[which(metadata$sample_id=="APCL13_650")]
+
+parent1.y= metadata$lat[which(metadata$sample_id=="APCL13_650")]
+parent1.x= metadata$lon[which(metadata$sample_id=="APCL13_650")]
+
+offsp1=po_dist$offs_sample_id[which(po_dist$par_sample_id=="APCL13_650")]
+
+offsp1_1.y= metadata$lat[which(metadata$sample_id==offsp1[1])]
+offsp1_1.x= metadata$lon[which(metadata$sample_id==offsp1[1])]
+
+offsp1_2.y= metadata$lat[which(metadata$sample_id==offsp1[2])]
+offsp1_2.x= metadata$lon[which(metadata$sample_id==offsp1[2])]
+
+plot(x=NULL,y=NULL,ylim=c(10.85,10.95),xlim=c(124.7,124.75))
+points(parent1.x,parent1.y,col="red")
+points(offsp1_1.x,offsp1_1.y,col="blue")
+points(offsp1_2.x,offsp1_2.y,col="blue")
+
+po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[1])]
+po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
