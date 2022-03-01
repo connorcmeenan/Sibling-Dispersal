@@ -309,3 +309,165 @@ points(offsp1_2.x,offsp1_2.y,col="blue")
 
 po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[1])]
 po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
+
+## plot of APCL12_117
+
+metadata$lat[which(metadata$sample_id=="APCL12_117")]
+
+parent1.y= metadata$lat[which(metadata$sample_id=="APCL12_117")]
+parent1.x= metadata$lon[which(metadata$sample_id=="APCL12_177")]
+
+offsp1=po_dist$offs_sample_id[which(po_dist$par_sample_id=="APCL12_117")]
+
+offsp1_1.y= metadata$lat[which(metadata$sample_id==offsp1[1])]
+offsp1_1.x= metadata$lon[which(metadata$sample_id==offsp1[1])]
+
+offsp1_2.y= metadata$lat[which(metadata$sample_id==offsp1[2])]
+offsp1_2.x= metadata$lon[which(metadata$sample_id==offsp1[2])]
+
+plot(x=NULL,y=NULL,ylim=c(10.85,10.95),xlim=c(124.70,124.75))
+points(parent1.x,parent1.y,col="red")
+points(offsp1_1.x,offsp1_1.y,col="blue")
+points(offsp1_2.x,offsp1_2.y,col="blue")
+
+po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[1])]
+po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
+
+## the following only has one identifiable match (APCL12_093)
+
+metadata$lat[which(metadata$sample_id=="APCL12_093")]
+
+parent1.y= metadata$lat[which(metadata$sample_id=="APCL12_093")]
+parent1.x= metadata$lon[which(metadata$sample_id=="APCL12_093")]
+
+offsp1=po_dist$offs_sample_id[which(po_dist$par_sample_id=="APCL12_093")]
+
+offsp1_1.y= metadata$lat[which(metadata$sample_id==offsp1[1])]
+offsp1_1.x= metadata$lon[which(metadata$sample_id==offsp1[1])]
+
+offsp1_2.y= metadata$lat[which(metadata$sample_id==offsp1[2])]
+offsp1_2.x= metadata$lon[which(metadata$sample_id==offsp1[2])]
+
+plot(x=NULL,y=NULL,ylim=c(10.80,10.93),xlim=c(124.70,124.74))
+points(parent1.x,parent1.y,col="red")
+points(offsp1_1.x,offsp1_1.y,col="blue")
+points(offsp1_2.x,offsp1_2.y,col="blue")
+
+po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[1])]
+po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
+
+## plot of APCL13_560
+
+metadata$lat[which(metadata$sample_id=="APCL13_560")]
+
+parent1.y= metadata$lat[which(metadata$sample_id=="APCL13_560")]
+parent1.x= metadata$lon[which(metadata$sample_id=="APCL13_560")]
+
+offsp1=po_dist$offs_sample_id[which(po_dist$par_sample_id=="APCL13_560")]
+
+offsp1_1.y= metadata$lat[which(metadata$sample_id==offsp1[1])]
+offsp1_1.x= metadata$lon[which(metadata$sample_id==offsp1[1])]
+
+offsp1_2.y= metadata$lat[which(metadata$sample_id==offsp1[2])]
+offsp1_2.x= metadata$lon[which(metadata$sample_id==offsp1[2])]
+
+plot(x=NULL,y=NULL,ylim=c(10.59,10.91),xlim=c(124.71,124.78))
+points(parent1.x,parent1.y,col="red")
+points(offsp1_1.x,offsp1_1.y,col="blue")
+points(offsp1_2.x,offsp1_2.y,col="blue")
+
+po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[1])]
+po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
+
+
+## plot of APCL13_295
+
+metadata$lat[which(metadata$sample_id=="APCL13_295")]
+
+parent1.y= metadata$lat[which(metadata$sample_id=="APCL13_295")]
+parent1.x= metadata$lon[which(metadata$sample_id=="APCL13_295")]
+
+offsp1=po_dist$offs_sample_id[which(po_dist$par_sample_id=="APCL13_295")]
+
+offsp1_1.y= metadata$lat[which(metadata$sample_id==offsp1[1])]
+offsp1_1.x= metadata$lon[which(metadata$sample_id==offsp1[1])]
+
+offsp1_2.y= metadata$lat[which(metadata$sample_id==offsp1[2])]
+offsp1_2.x= metadata$lon[which(metadata$sample_id==offsp1[2])]
+
+plot(x=NULL,y=NULL,ylim=c(10.77,10.93),xlim=c(124.71,124.79))
+points(parent1.x,parent1.y,col="red")
+points(offsp1_1.x,offsp1_1.y,col="blue")
+points(offsp1_2.x,offsp1_2.y,col="blue")
+
+po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[1])]
+po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
+
+## plot of APCL12_154
+
+metadata$lat[which(metadata$sample_id=="APCL12_154")]
+
+parent1.y= metadata$lat[which(metadata$sample_id=="APCL12_154")]
+parent1.x= metadata$lon[which(metadata$sample_id=="APCL12_154")]
+
+offsp1=po_dist$offs_sample_id[which(po_dist$par_sample_id=="APCL12_154")]
+
+offsp1_1.y= metadata$lat[which(metadata$sample_id==offsp1[1])]
+offsp1_1.x= metadata$lon[which(metadata$sample_id==offsp1[1])]
+
+offsp1_2.y= metadata$lat[which(metadata$sample_id==offsp1[2])]
+offsp1_2.x= metadata$lon[which(metadata$sample_id==offsp1[2])]
+
+plot(x=NULL,y=NULL,ylim=c(10.79,10.91),xlim=c(124.715,124.735))
+points(parent1.x,parent1.y,col="red")
+points(offsp1_1.x,offsp1_1.y,col="blue")
+points(offsp1_2.x,offsp1_2.y,col="blue")
+
+po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[1])]
+po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
+
+## plot of APCL15_356001
+
+metadata$lat[which(metadata$sample_id=="APCL15_356001")]
+
+parent1.y= metadata$lat[which(metadata$sample_id=="APCL15_356001")]
+parent1.x= metadata$lon[which(metadata$sample_id=="APCL15_356001")]
+
+offsp1=po_dist$offs_sample_id[which(po_dist$par_sample_id=="APCL15_356001")]
+
+offsp1_1.y= metadata$lat[which(metadata$sample_id==offsp1[1])]
+offsp1_1.x= metadata$lon[which(metadata$sample_id==offsp1[1])]
+
+offsp1_2.y= metadata$lat[which(metadata$sample_id==offsp1[2])]
+offsp1_2.x= metadata$lon[which(metadata$sample_id==offsp1[2])]
+
+plot(x=NULL,y=NULL,ylim=c(10.850,10.865),xlim=c(124.72,124.727))
+points(parent1.x,parent1.y,col="red")
+points(offsp1_1.x,offsp1_1.y,col="blue")
+points(offsp1_2.x,offsp1_2.y,col="blue")
+
+po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[1])]
+po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
+
+## plot of APCL15_363819
+
+metadata$lat[which(metadata$sample_id=="APCL15_363819")]
+
+parent1.y= metadata$lat[which(metadata$sample_id=="APCL15_363819")]
+parent1.x= metadata$lon[which(metadata$sample_id=="APCL15_363819")]
+
+offsp1=po_dist$offs_sample_id[which(po_dist$par_sample_id=="APCL15_363819")]
+
+offsp1_1.y= metadata$lat[which(metadata$sample_id==offsp1[1])]
+offsp1_1.x= metadata$lon[which(metadata$sample_id==offsp1[1])]
+
+offsp1_2.y= metadata$lat[which(metadata$sample_id==offsp1[2])]
+offsp1_2.x= metadata$lon[which(metadata$sample_id==offsp1[2])]
+
+plot(x=NULL,y=NULL,ylim=c(10.855,10.88),xlim=c(124.708,124.725))
+points(parent1.x,parent1.y,col="red")
+points(offsp1_1.x,offsp1_1.y,col="blue")
+points(offsp1_2.x,offsp1_2.y,col="blue")
+
+po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[1])]
+po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
