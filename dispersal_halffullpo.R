@@ -265,13 +265,7 @@ po_2018 <- po_dist %>% filter(offs_year==2018)
 plot(ecdf(po_2018$dist_par_km),cex=0,lwd=2,xlim=c(0,30),col="purple",main = "",xlab="Distance")
 plot(ecdf(halfsibs_2018$distance),cex=0,lwd=2,col="blue",add=T)
 
-## plot size differences by year
-
-## think about what to do with half-sibs from different years
-
-## simulations using PO distances from same year as siblings
-
-## did we have any parents of the full/half siblings in the PO dataset (for identifying dispersal origin)
+## Plotting PO data
 
 names(sib_dist)
 
@@ -471,3 +465,11 @@ points(offsp1_2.x,offsp1_2.y,col="blue")
 
 po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[1])]
 po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
+
+## plot size differences by year
+
+## think about what to do with half-sibs from different years
+
+## simulations using PO distances from same year as siblings
+
+## did we have any parents of the full/half siblings in the PO dataset (for identifying dispersal origin)
