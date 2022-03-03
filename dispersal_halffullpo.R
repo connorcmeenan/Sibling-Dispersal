@@ -476,7 +476,13 @@ points(offsp1_2.x,offsp1_2.y,col="blue")
 po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[1])]
 po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
 
-<<<<<<< HEAD
+## plot size differences by year
+
+## think about what to do with half-sibs from different years
+
+## simulations using PO distances from same year as siblings
+
+## did we have any parents of the full/half siblings in the PO dataset (for identifying dispersal origin)
 
 
 #### 2014 sibling group
@@ -510,13 +516,3 @@ plot(ecdf(halfsibs_noNA$distance),cex=0,lwd=2,col="blue",add=T)
 plot(ecdf(sib_no2014Palanas$dist_km),cex=0,lwd=2,col="gold",add=T)
 
 legend(x=15,y=0.4,legend=c("Unrelated Pairs","Parent-Offspring Pairs","Full Sibling Pairs (2014 Palanas)","Half Sibling Pairs","Full Sibling Pairs (Others)"),col=c("black","purple","red","blue","gold"),lty=c(1,1,1,1,1),lwd=2)
-
-=======
-## plot size differences by year
-
-## think about what to do with half-sibs from different years
-
-## simulations using PO distances from same year as siblings
-
-## did we have any parents of the full/half siblings in the PO dataset (for identifying dispersal origin)
->>>>>>> 9f760ea99c31c732f7e9f26ca30dfa6179ea2bb6
