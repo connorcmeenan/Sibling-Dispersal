@@ -342,16 +342,22 @@ parent1.x= metadata$lon[which(metadata$sample_id=="APCL12_093")]
 
 offsp1=po_dist$offs_sample_id[which(po_dist$par_sample_id=="APCL12_093")]
 
+## "APCL13_295" missing from metadata, but there is a third sibling?
+
 offsp1_1.y= metadata$lat[which(metadata$sample_id==offsp1[1])]
 offsp1_1.x= metadata$lon[which(metadata$sample_id==offsp1[1])]
 
 offsp1_2.y= metadata$lat[which(metadata$sample_id==offsp1[2])]
 offsp1_2.x= metadata$lon[which(metadata$sample_id==offsp1[2])]
 
-plot(x=NULL,y=NULL,ylim=c(10.80,10.93),xlim=c(124.70,124.74))
+offsp1_3.y= metadata$lat[which(metadata$sample_id==offsp1[3])]
+offsp1_3.x= metadata$lon[which(metadata$sample_id==offsp1[3])]
+
+plot(x=NULL,y=NULL,ylim=c(10.78,10.93),xlim=c(124.70,124.8))
 points(parent1.x,parent1.y,col="red")
 points(offsp1_1.x,offsp1_1.y,col="blue")
 points(offsp1_2.x,offsp1_2.y,col="blue")
+points(offsp1_3.x,offsp1_3.y,col="blue")
 
 po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[1])]
 po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
@@ -381,6 +387,8 @@ po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
 
 
 ## plot of APCL13_295
+
+### I think this might be included in both the PO and sibling lists?
 
 metadata$lat[which(metadata$sample_id=="APCL13_295")]
 
@@ -428,6 +436,8 @@ po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
 
 ## plot of APCL15_356001
 
+## offfspring  are the same as APCL12_154 (both parents sampled!)
+
 metadata$lat[which(metadata$sample_id=="APCL15_356001")]
 
 parent1.y= metadata$lat[which(metadata$sample_id=="APCL15_356001")]
@@ -471,3 +481,38 @@ points(offsp1_2.x,offsp1_2.y,col="blue")
 
 po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[1])]
 po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
+
+
+
+#### 2014 sibling group
+
+sib_dist %>% 
+  filter(sib1_year==2014) %>% 
+  filter(sib1_site=="Palanas") -> sib_2014Palanas
+
+sib_2014Palanas$dist_km
+
+unique(c(sib_2014Palanas$sib1_sample_id,sib_2014Palanas$sib2_sample_id)) -> sib_2014Palanas_IDs
+
+sib_dist %>% 
+  filter(!sib1_sample_id %in% sib_2014Palanas_IDs) %>% 
+  filter(!sib2_sample_id %in% sib_2014Palanas_IDs) -> sib_no2014Palanas
+
+sib_no2014Palanas$dist_km
+
+
+##### plotting 
+
+
+### plot empirical cumulative distribution functions
+
+par(mfrow=c(1,1))
+
+plot(ecdf(pairs_no_rep$distance_km),main = "",xlab="Distance",cex=0,lwd=2,col="black")
+plot(ecdf(po_dist$dist_par_km),cex=0,lwd=2,col="purple",add=T)
+plot(ecdf(sib_2014Palanas$dist_km),cex=0,lwd=2,col="red",add=T)
+plot(ecdf(halfsibs_noNA$distance),cex=0,lwd=2,col="blue",add=T)
+plot(ecdf(sib_no2014Palanas$dist_km),cex=0,lwd=2,col="gold",add=T)
+
+legend(x=15,y=0.4,legend=c("Unrelated Pairs","Parent-Offspring Pairs","Full Sibling Pairs (2014 Palanas)","Half Sibling Pairs","Full Sibling Pairs (Others)"),col=c("black","purple","red","blue","gold"),lty=c(1,1,1,1,1),lwd=2)
+
