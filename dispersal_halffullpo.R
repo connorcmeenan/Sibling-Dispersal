@@ -162,6 +162,8 @@ n500_sim_dist_trunc=n500_sim_dist[which(n500_sim_dist<max(po_dist$dist_par_km))]
 
 
 ### plot empirical cumulative distribution functions
+library(wesanderson)
+ecdf_palette=wes_palette("Darjeeling1")
 
 par(mfrow=c(1,1))
 
@@ -169,12 +171,12 @@ plot(ecdf(pairs_no_rep$distance_km),main = "",xlab="Distance",cex=0,lwd=2,col="b
 plot(ecdf(po_dist$dist_par_km),cex=0,lwd=2,col="purple",add=T)
 legend(x=15,y=0.4,legend=c("Unrelated Pairs","Parent-Offspring Pairs"),col=c("black","purple"),lty=c(1,1),lwd=2)
 
-plot(ecdf(pairs_no_rep$distance_km),main = "",xlab="Distance",cex=0,lwd=2,col="black")
-plot(ecdf(po_dist$dist_par_km),cex=0,lwd=2,col="purple",add=T)
-plot(ecdf(sib_dist$dist_km),cex=0,lwd=2,col="red",add=T)
-plot(ecdf(halfsibs_noNA$distance),cex=0,lwd=2,col="blue",add=T)
+plot(ecdf(pairs_no_rep$distance_km),main = "",xlab="Distance",cex=0,lwd=2,col=ecdf_palette[1])
+plot(ecdf(po_dist$dist_par_km),cex=0,lwd=2,col=ecdf_palette[2],add=T)
+plot(ecdf(sib_dist$dist_km),cex=0,lwd=2,col=ecdf_palette[3],add=T)
+plot(ecdf(halfsibs_noNA$distance),cex=0,lwd=2,col=ecdf_palette[4],add=T)
 
-plot(ecdf(n500_sim_dist_trunc),cex=0,lwd=2,col="gold",add=T)
+plot(ecdf(n500_sim_dist_trunc),cex=0,lwd=2,col=ecdf_palette[5],add=T)
 
 legend(x=15,y=0.4,legend=c("Unrelated Pairs","Parent-Offspring Pairs","Full Sibling Pairs","Half Sibling Pairs","Simulated Sibling Pairs"),col=c("black","purple","red","blue","gold"),lty=c(1,1,1,1,1),lwd=2)
 
@@ -185,6 +187,17 @@ ks.test(po_dist$dist_par_km,n500_sim_dist_trunc)
 
 ks.test(halfsibs_noNA$distance,pairs_no_rep$distance_km)
 
+### calculating mean, median, sd, CV
+po_dist
+po_dist$dist_par_km
+##mean
+mean(po_dist$dist_par_km)
+##median
+median(po_dist$dist_par_km)
+##standard deviation
+sd(po_dist$dist_par_km)
+#CV
+100*sd(po_dist$dist_par_km)/mean(po_dist$dist_par_km)
 
 ##### looking at difference in capture dates and differences in size
 
@@ -515,4 +528,4 @@ plot(ecdf(sib_2014Palanas$dist_km),cex=0,lwd=2,col="red",add=T)
 plot(ecdf(halfsibs_noNA$distance),cex=0,lwd=2,col="blue",add=T)
 plot(ecdf(sib_no2014Palanas$dist_km),cex=0,lwd=2,col="gold",add=T)
 
-legend(x=15,y=0.4,legend=c("Unrelated Pairs","Parent-Offspring Pairs","Full Sibling Pairs (2014 Palanas)","Half Sibling Pairs","Full Sibling Pairs (Others)"),col=c("black","purple","red","blue","gold"),lty=c(1,1,1,1,1),lwd=2)
+legend(x=15,y=0.5,legend=c("Unrelated Pairs","Parent-Offspring Pairs","Full Sibling Pairs (2014 Palanas)","Half Sibling Pairs","Full Sibling Pairs (Others)"),col=c("black","purple","red","blue","gold"),lty=c(1,1,1,1,1),lwd=2)
