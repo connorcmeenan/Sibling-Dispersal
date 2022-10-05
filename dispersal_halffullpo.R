@@ -187,7 +187,7 @@ ks.test(po_dist$dist_par_km,n500_sim_dist_trunc)
 
 ks.test(halfsibs_noNA$distance,pairs_no_rep$distance_km)
 
-### calculating mean, median, sd, CV
+### calculating mean, median, sd, CV for Parent Offspring
 po_dist
 po_dist$dist_par_km
 ##mean
@@ -198,6 +198,30 @@ median(po_dist$dist_par_km)
 sd(po_dist$dist_par_km)
 #CV
 100*sd(po_dist$dist_par_km)/mean(po_dist$dist_par_km)
+
+### calculating mean, median, sd, CV for Half Siblings
+halfsibs_noNA
+halfsibs_noNA$distance
+##mean
+mean(halfsibs_noNA$distance)
+##median
+median(halfsibs_noNA$distance)
+##standard deviation
+sd(halfsibs_noNA$distance)
+#CV
+100*sd(halfsibs_noNA$distance)/mean(halfsibs_noNA$distance)
+
+### calculating mean, median, sd, CV for Full Siblings
+na.omit(sib_dist)
+na.omit(sib_dist$dist_km)
+##mean
+mean(na.omit(sib_dist$dist_km))
+##median
+median(na.omit(sib_dist$dist_km))
+##standard deviation
+sd(na.omit(sib_dist$dist_km))
+#CV
+100*sd(na.omit(sib_dist$dist_km))/mean(na.omit(sib_dist$dist_km))
 
 ##### looking at difference in capture dates and differences in size
 
