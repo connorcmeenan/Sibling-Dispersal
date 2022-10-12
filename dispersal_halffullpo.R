@@ -548,13 +548,11 @@ ggplot(data = world) +
 #plotting just the study site plus a parent-offspring pair 
 ggplot(data = world) +
   geom_sf() +
-  coord_sf(xlim = c(124, 126), ylim = c(10.5, 11.5), expand = FALSE) +
+  coord_sf(xlim = c(124.5, 125), ylim = c(10.7, 11), expand = FALSE) +
   geom_segment(aes(x = parent1.x, y = parent1.y, xend = offsp1_1.x, yend = offsp1_1.y),
-             arrow = arrow(length = unit(0.5, "cm")))+
-  geom_point(aes(x=parent1.x,y=parent1.y))
-
-  
-
+             arrow = arrow(length = unit(0.2, "cm")))+
+  geom_point(aes(x=parent1.x,y=parent1.y),colour="blue") +
+  geom_point(aes(x=offsp1_1.x,y=offsp1_1.y),colour="red") 
 
 ## Github Push test
 
