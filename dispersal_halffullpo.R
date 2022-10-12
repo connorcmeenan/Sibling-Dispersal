@@ -199,6 +199,42 @@ sd(po_dist$dist_par_km)
 #CV
 100*sd(po_dist$dist_par_km)/mean(po_dist$dist_par_km)
 
+### calculating mean, median, sd, CV for Parent Offspring
+po_dist
+po_dist$dist_par_km
+##mean
+mean(po_dist$dist_par_km)
+##median
+median(po_dist$dist_par_km)
+##standard deviation
+sd(po_dist$dist_par_km)
+#CV
+100*sd(po_dist$dist_par_km)/mean(po_dist$dist_par_km)
+
+### calculating mean, median, sd, CV for Half Siblings
+halfsibs_noNA
+halfsibs_noNA$distance
+##mean
+mean(halfsibs_noNA$distance)
+##median
+median(halfsibs_noNA$distance)
+##standard deviation
+sd(halfsibs_noNA$distance)
+#CV
+100*sd(halfsibs_noNA$distance)/mean(halfsibs_noNA$distance)
+
+### calculating mean, median, sd, CV for Full Siblings
+na.omit(sib_dist)
+na.omit(sib_dist$dist_km)
+##mean
+mean(na.omit(sib_dist$dist_km))
+##median
+median(na.omit(sib_dist$dist_km))
+##standard deviation
+sd(na.omit(sib_dist$dist_km))
+#CV
+100*sd(na.omit(sib_dist$dist_km))/mean(na.omit(sib_dist$dist_km))
+
 ##### looking at difference in capture dates and differences in size
 
 as.Date(halfsibs_noNA$date_sib1)-as.Date(halfsibs_noNA$date_sib2)
@@ -488,6 +524,37 @@ points(offsp1_2.x,offsp1_2.y,col="blue")
 
 po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[1])]
 po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
+
+## making maps!
+
+install.packages(c("cowplot", "googleway", "ggplot2", "ggrepel", "ggspatial", "libwgeom", "sf", "rnaturalearth", "rnaturalearthdata"))
+
+library("ggplot2")
+theme_set(theme_bw())
+library("sf")
+library("rnaturalearth")
+library("rnaturalearthdata")
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+# plotting world map
+ggplot(data = world) +
+  geom_sf()
+
+#plotting just philippines
+ggplot(data = world) +
+  geom_sf() +
+  coord_sf(xlim = c(110, 130), ylim = c(5, 20), expand = FALSE)
+  
+#plotting just the study site plus a parent-offspring pair 
+ggplot(data = world) +
+  geom_sf() +
+  coord_sf(xlim = c(124, 126), ylim = c(10.5, 11.5), expand = FALSE) +
+  geom_segment(aes(x = parent1.x, y = parent1.y, xend = offsp1_1.x, yend = offsp1_1.y),
+             arrow = arrow(length = unit(0.5, "cm")))+
+  geom_point(aes(x=parent1.x,y=parent1.y))
+
+  
+
 
 ## Github Push test
 
