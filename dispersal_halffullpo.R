@@ -199,6 +199,18 @@ sd(po_dist$dist_par_km)
 #CV
 100*sd(po_dist$dist_par_km)/mean(po_dist$dist_par_km)
 
+### calculating mean, median, sd, CV for Parent Offspring
+po_dist
+po_dist$dist_par_km
+##mean
+mean(po_dist$dist_par_km)
+##median
+median(po_dist$dist_par_km)
+##standard deviation
+sd(po_dist$dist_par_km)
+#CV
+100*sd(po_dist$dist_par_km)/mean(po_dist$dist_par_km)
+
 ### calculating mean, median, sd, CV for Half Siblings
 halfsibs_noNA
 halfsibs_noNA$distance
@@ -512,6 +524,35 @@ points(offsp1_2.x,offsp1_2.y,col="blue")
 
 po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[1])]
 po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
+
+## making maps!
+
+install.packages(c("cowplot", "googleway", "ggplot2", "ggrepel", "ggspatial", "libwgeom", "sf", "rnaturalearth", "rnaturalearthdata"))
+
+library("ggplot2")
+theme_set(theme_bw())
+library("sf")
+library("rnaturalearth")
+library("rnaturalearthdata")
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+# plotting world map
+ggplot(data = world) +
+  geom_sf()
+
+#plotting just philippines
+ggplot(data = world) +
+  geom_sf() +
+  coord_sf(xlim = c(110, 130), ylim = c(5, 20), expand = FALSE)
+  
+#plotting just the study site plus a parent-offspring pair 
+ggplot(data = world) +
+  geom_sf() +
+  coord_sf(xlim = c(124.5, 125), ylim = c(10.7, 11), expand = FALSE) +
+  geom_segment(aes(x = parent1.x, y = parent1.y, xend = offsp1_1.x, yend = offsp1_1.y),
+             arrow = arrow(length = unit(0.2, "cm")))+
+  geom_point(aes(x=parent1.x,y=parent1.y),colour="blue") +
+  geom_point(aes(x=offsp1_1.x,y=offsp1_1.y),colour="red") 
 
 ## Github Push test
 
