@@ -525,6 +525,29 @@ points(offsp1_2.x,offsp1_2.y,col="blue")
 po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[1])]
 po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
 
+## putting all of the PO coordinates in one script
+
+PO_to_map=po_dist$par_sample_id[po_dist$offs_sample_id %in% sib_po]
+
+PO_to_map=PO_to_map[-2]
+PO_to_map=PO_to_map[-5]
+PO_to_map=PO_to_map[-6]
+PO_to_map=PO_to_map[-6]
+
+PO_mapping=data.frame(matrix(ncol=6,nrow=length(PO_to_map)))
+colnames(PO_mapping)=c("parent1.y","parent1.x","offsp1_1.y","offsp1_1.x","offsp1_2.y","offsp1_2.x")
+
+
+for(i in 1:length(PO_to_map)){
+  PO_mapping$parent1.y[i]= metadata$lat[which(metadata$sample_id==PO_to_map[i])]
+  PO_mapping$parent1.x[i]= metadata$lon[which(metadata$sample_id==PO_to_map[i])]
+  offsp1=po_dist$offs_sample_id[which(po_dist$par_sample_id==PO_to_map[i])]
+  PO_mapping$offsp1_1.y[i]= metadata$lat[which(metadata$sample_id==offsp1[1])]
+  PO_mapping$offsp1_1.x[i]= metadata$lon[which(metadata$sample_id==offsp1[1])]
+  PO_mapping$offsp1_2.y[i]= metadata$lat[which(metadata$sample_id==offsp1[2])]
+  PO_mapping$offsp1_2.x[i]= metadata$lon[which(metadata$sample_id==offsp1[2])]
+}
+
 ## making maps!
 
 install.packages(c("cowplot", "googleway", "ggplot2", "ggrepel", "ggspatial", "libwgeom", "sf", "rnaturalearth", "rnaturalearthdata"))
@@ -545,14 +568,22 @@ ggplot(data = world) +
   geom_sf() +
   coord_sf(xlim = c(110, 130), ylim = c(5, 20), expand = FALSE)
   
-#plotting just the study site plus a parent-offspring pair 
+#plotting just the study site plus one parent-offspring pair 
 ggplot(data = world) +
   geom_sf() +
   coord_sf(xlim = c(124.5, 125), ylim = c(10.7, 11), expand = FALSE) +
-  geom_segment(aes(x = parent1.x, y = parent1.y, xend = offsp1_1.x, yend = offsp1_1.y),
-             arrow = arrow(length = unit(0.2, "cm")))+
   geom_point(aes(x=parent1.x,y=parent1.y),colour="blue") +
   geom_point(aes(x=offsp1_1.x,y=offsp1_1.y),colour="red") 
+
+#plotting just the study site plus all parent-offspring pairs
+ggplot(data = world) +
+  geom_sf() +
+  coord_sf(xlim = c(124.7, 124.8), ylim = c(10.85, 10.9), expand = FALSE) +
+  geom_point(aes(x=parent1.x,y=parent1.y),data=PO_mapping,colour="blue") +
+  geom_point(aes(x=offsp1_1.x,y=offsp1_1.y),data=PO_mapping,colour="red") +
+  geom_point(aes(x=offsp1_2.x,y=offsp1_2.y),data=PO_mapping,colour="red")
+
+
 
 ## Github Push test
 
