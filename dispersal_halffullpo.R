@@ -144,6 +144,45 @@ plot(density(fullsib_sim_dist))
 
 ks.test(na.omit(sib_dist$dist_km),fullsib_sim_dist)
 
+### trying a while loop!
+## max distance = Palanas to Sitio Baybayon
+
+ext1=c(max(metadata$lon[which(metadata$site=="Palanas")]),max(metadata$lat[which(metadata$site=="Palanas")]))
+ext2=c(min(metadata$lon[which(metadata$site=="Sitio Baybayon")]),max(metadata$lat[which(metadata$site=="Sitio Baybayon")]))
+
+maxdist=distHaversine(ext1,ext2,r=6378.137)
+
+## or just use maximum observed distance!
+
+maxdist=max(po_dist$dist_par_k)
+
+halfsib_sim_dist_while=vector()
+
+i=1
+while (i < length(halfsibs_noNA$distance)){
+  dists=sample(po_dist$dist_par_km,2)
+  dists_ord=dists[order(dists,decreasing=TRUE)]
+  dists_comp=ifelse(runif(1)<0.5,dists_ord[1]-dists_ord[2],dists_ord[1]+dists_ord[2])
+  dists_comp
+  if(dists_comp < maxdist)
+    {halfsib_sim_dist_while[i]=dists_comp
+    i = i+1
+  }
+}
+
+fullsib_sim_dist_while=vector()
+
+i=1
+while (i < length(na.omit(sib_dist$dist_km))){
+  dists=sample(po_dist$dist_par_km,2)
+  dists_ord=dists[order(dists,decreasing=TRUE)]
+  dists_comp=ifelse(runif(1)<0.5,dists_ord[1]-dists_ord[2],dists_ord[1]+dists_ord[2])
+  dists_comp
+  if(dists_comp < maxdist)
+  {fullsib_sim_dist_while[i]=dists_comp
+  i = i+1
+  }
+}
 
 #### just generate 500 random sibling distances and remove any that are > maximum PO distance
 
@@ -178,14 +217,21 @@ plot(ecdf(halfsibs_noNA$distance),cex=0,lwd=2,col=ecdf_palette[4],add=T)
 
 plot(ecdf(n500_sim_dist_trunc),cex=0,lwd=2,col=ecdf_palette[5],add=T)
 
-legend(x=15,y=0.4,legend=c("Unrelated Pairs","Parent-Offspring Pairs","Full Sibling Pairs","Half Sibling Pairs","Simulated Sibling Pairs"),col=c("black","purple","red","blue","gold"),lty=c(1,1,1,1,1),lwd=2)
+legend(x=15,y=0.4,legend=c("Unrelated Pairs","Parent-Offspring Pairs","Full Sibling Pairs","Half Sibling Pairs","Simulated Sibling Pairs"),col=c(ecdf_palette[1],ecdf_palette[2],ecdf_palette[3],ecdf_palette[4],ecdf_palette[5]),lty=c(1,1,1,1,1),lwd=2)
 
+#ks tests for n=500
 
 ks.test(na.omit(sib_dist$dist_km),n500_sim_dist_trunc)
 ks.test(halfsibs_noNA$distance,n500_sim_dist_trunc)
 ks.test(po_dist$dist_par_km,n500_sim_dist_trunc)
 
 ks.test(halfsibs_noNA$distance,pairs_no_rep$distance_km)
+
+#ks tests for while loop sims (with equal sample size to observed)
+
+ks.test(na.omit(sib_dist$dist_km),fullsib_sim_dist_while)
+ks.test(halfsibs_noNA$distance,halfsib_sim_dist_while)
+
 
 ### calculating mean, median, sd, CV
 po_dist
