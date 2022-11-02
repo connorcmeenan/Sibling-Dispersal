@@ -527,12 +527,25 @@ po_dist$dist_par_km[which(po_dist$offs_sample_id==offsp1[2])]
 
 ## putting all of the PO coordinates in one script
 
-PO_to_map=po_dist$par_sample_id[po_dist$offs_sample_id %in% sib_po]
+po_dist$par_sample_id
+sib_dist$sib1_sample_id
 
-PO_to_map=PO_to_map[-2]
-PO_to_map=PO_to_map[-5]
-PO_to_map=PO_to_map[-6]
-PO_to_map=PO_to_map[-6]
+#sib1s in parent-offspring list
+intersect(po_dist$offs_sample_id,sib_dist$sib1_sample_id)
+#sib2s in parent-offspring list
+intersect(po_dist$offs_sample_id,sib_dist$sib2_sample_id)
+
+#parents of all of these siblings
+po_dist$par_sample_id[po_dist$offs_sample_id %in% sib_po]
+
+#either sib1 or sib2 in parent-offspring list
+sibs_to_map<-intersect(po_dist$offs_sample_id,c(sib_dist$sib1_sample_id,sib_dist$sib2_sample_id))
+
+sib_parent_df=data.frame(sibs_to_map)
+
+sib_parent_df$parents_to_map=po_dist$par_sample_id[po_dist$offs_sample_id %in% sibs_to_map]
+
+
 
 PO_mapping=data.frame(matrix(ncol=6,nrow=length(PO_to_map)))
 colnames(PO_mapping)=c("parent1.y","parent1.x","offsp1_1.y","offsp1_1.x","offsp1_2.y","offsp1_2.x")
@@ -582,7 +595,6 @@ ggplot(data = world) +
   geom_point(aes(x=parent1.x,y=parent1.y),data=PO_mapping,colour="blue") +
   geom_point(aes(x=offsp1_1.x,y=offsp1_1.y),data=PO_mapping,colour="red") +
   geom_point(aes(x=offsp1_2.x,y=offsp1_2.y),data=PO_mapping,colour="red")
-
 
 
 ## Github Push test
