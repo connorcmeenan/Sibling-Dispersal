@@ -541,24 +541,29 @@ po_dist$par_sample_id[po_dist$offs_sample_id %in% sib_po]
 #either sib1 or sib2 in parent-offspring list
 sibs_to_map<-intersect(po_dist$offs_sample_id,c(sib_dist$sib1_sample_id,sib_dist$sib2_sample_id))
 
-sib_parent_df=data.frame(sibs_to_map)
+sib_parent_df=data.frame(matrix(ncol=12,nrow=length(sibs_to_map)))
+colnames(sib_parent_df)=c("parent1.id","parent1.site","parent1.y","parent1.x","parent2.id","parent2.site","parent2.y","parent2.x","offsp.id","offsp.site","offsp.y","offsp.x")
 
-sib_parent_df$parents_to_map=po_dist$par_sample_id[po_dist$offs_sample_id %in% sibs_to_map]
+#which offspring have two parents?
+which(po_dist$offs_sample_id==sibs_to_map[2])
+which(po_dist$offs_sample_id==sibs_to_map[6])
+which(po_dist$offs_sample_id==sibs_to_map[9])
+which(po_dist$offs_sample_id==sibs_to_map[10])
 
 
-
-PO_mapping=data.frame(matrix(ncol=6,nrow=length(PO_to_map)))
-colnames(PO_mapping)=c("parent1.y","parent1.x","offsp1_1.y","offsp1_1.x","offsp1_2.y","offsp1_2.x")
-
-
-for(i in 1:length(PO_to_map)){
-  PO_mapping$parent1.y[i]= metadata$lat[which(metadata$sample_id==PO_to_map[i])]
-  PO_mapping$parent1.x[i]= metadata$lon[which(metadata$sample_id==PO_to_map[i])]
-  offsp1=po_dist$offs_sample_id[which(po_dist$par_sample_id==PO_to_map[i])]
-  PO_mapping$offsp1_1.y[i]= metadata$lat[which(metadata$sample_id==offsp1[1])]
-  PO_mapping$offsp1_1.x[i]= metadata$lon[which(metadata$sample_id==offsp1[1])]
-  PO_mapping$offsp1_2.y[i]= metadata$lat[which(metadata$sample_id==offsp1[2])]
-  PO_mapping$offsp1_2.x[i]= metadata$lon[which(metadata$sample_id==offsp1[2])]
+for(i in 1:length(sibs_to_map)){
+  sib_parent_df$parent1.id[i]=po_dist$par_sample_id[which(po_dist$offs_sample_id==sibs_to_map[i])[1]]
+  sib_parent_df$parent1.site[i]=metadata$site[which(metadata$sample_id==sib_parent_df$parent1.id[i])]
+  sib_parent_df$parent1.y[i]=metadata$lat[which(metadata$sample_id==sib_parent_df$parent1.id[i])]
+  sib_parent_df$parent1.x[i]=metadata$lon[which(metadata$sample_id==sib_parent_df$parent1.id[i])]
+  sib_parent_df$parent2.id[i]=ifelse(is.na(po_dist$par_sample_id[which(po_dist$offs_sample_id==sibs_to_map[i])[2]]),"NA",po_dist$par_sample_id[which(po_dist$offs_sample_id==sibs_to_map[i])[2]])
+  sib_parent_df$parent2.site[i]=ifelse(is.na(po_dist$par_sample_id[which(po_dist$offs_sample_id==sibs_to_map[i])[2]]),"NA",metadata$site[which(metadata$sample_id==sib_parent_df$parent1.id[i])])
+  sib_parent_df$parent2.y[i]=ifelse(is.na(po_dist$par_sample_id[which(po_dist$offs_sample_id==sibs_to_map[i])[2]]),"NA",metadata$lat[which(metadata$sample_id==sib_parent_df$parent1.id[i])])
+  sib_parent_df$parent2.x[i]=ifelse(is.na(po_dist$par_sample_id[which(po_dist$offs_sample_id==sibs_to_map[i])[2]]),"NA",metadata$lon[which(metadata$sample_id==sib_parent_df$parent1.id[i])])
+  sib_parent_df$offsp.id[i]=sibs_to_map[i]
+  sib_parent_df$offsp.site[i]=metadata$site[which(metadata$sample_id==sib_parent_df$offsp.id[i])]
+  sib_parent_df$offsp.y[i]=metadata$lat[which(metadata$sample_id==sib_parent_df$offsp.id[i])]
+  sib_parent_df$offsp.x[i]=metadata$lon[which(metadata$sample_id==sib_parent_df$offsp.id[i])]
 }
 
 ## making maps!
@@ -591,10 +596,14 @@ ggplot(data = world) +
 #plotting just the study site plus all parent-offspring pairs
 ggplot(data = world) +
   geom_sf() +
-  coord_sf(xlim = c(124.7, 124.8), ylim = c(10.85, 10.9), expand = FALSE) +
-  geom_point(aes(x=parent1.x,y=parent1.y),data=PO_mapping,colour="blue") +
-  geom_point(aes(x=offsp1_1.x,y=offsp1_1.y),data=PO_mapping,colour="red") +
-  geom_point(aes(x=offsp1_2.x,y=offsp1_2.y),data=PO_mapping,colour="red")
+  coord_sf(xlim = c(124.6, 124.9), ylim = c(10.6, 10.9), expand = FALSE) +
+  geom_curve(data=sib_parent_df,aes(x=parent1.x,y=parent1.y,xend=offsp.x,yend=offsp.y),arrow = arrow(length = unit(0.01, "npc")))
+  
+#plotting just the study site plus all parent-offspring pairs
+ggplot(data = world) +
+  geom_sf() +
+  coord_sf(xlim = c(124.7, 124.74), ylim = c(10.84, 10.88), expand = FALSE) +
+  geom_curve(data=sib_parent_df,aes(x=parent1.x,y=parent1.y,xend=offsp.x,yend=offsp.y),arrow = arrow(length = unit(0.01, "npc"))) 
 
 
 
