@@ -605,6 +605,43 @@ ggplot(data = world) +
   coord_sf(xlim = c(124.7, 124.74), ylim = c(10.84, 10.88), expand = FALSE) +
   geom_curve(data=sib_parent_df,aes(x=parent1.x,y=parent1.y,xend=offsp.x,yend=offsp.y),arrow = arrow(length = unit(0.01, "npc"))) 
 
+# select offspring of APCL13_560 and plot
+APCL13_560_offspring=sib_parent_df[which(sib_parent_df$parent1.id=="APCL13_560"),]
+
+ggplot(data = world) +
+  geom_sf() +
+  coord_sf(xlim = c(124.7, 124.95), ylim = c(10.63, 10.88), expand = FALSE) +
+  geom_segment(data=APCL13_560_offspring,aes(x=parent1.x,y=parent1.y,xend=offsp.x,yend=offsp.y),arrow = arrow(length = unit(0.01, "npc"))) 
+
+# select offspring of APCL12_093 and plot
+APCL12_093_offspring=sib_parent_df[which(sib_parent_df$parent1.id=="APCL12_093"),]
+
+ggplot(data = world) +
+  geom_sf() +
+  coord_sf(xlim = c(124.7, 124.8), ylim = c(10.78, 10.88), expand = FALSE) +
+  geom_segment(data=APCL12_093_offspring,aes(x=parent1.x,y=parent1.y,xend=offsp.x,yend=offsp.y),arrow = arrow(length = unit(0.01, "npc"))) 
+
+# select offspring from short-distance dispersals and plot
+sib_parent_short=sib_parent_df[which(sib_parent_df$parent1.id!="APCL12_093" & sib_parent_df$parent1.id!="APCL13_560"),]
+
+ggplot(data = world) +
+  geom_sf() +
+  coord_sf(xlim = c(124.705, 124.73), ylim = c(10.85, 10.88), expand = FALSE) +
+  geom_segment(data=sib_parent_short,aes(x=parent1.x,y=parent1.y,xend=offsp.x,yend=offsp.y),arrow = arrow(length = unit(0.01, "npc"))) 
+
+ggplot(data = world) +
+  geom_sf() +
+  coord_sf(xlim = c(124.705, 124.73), ylim = c(10.85, 10.88), expand = FALSE) +
+  geom_curve(data=sib_parent_short,aes(x=parent1.x,y=parent1.y,xend=offsp.x,yend=offsp.y),arrow = arrow(length = unit(0.01, "npc"))) 
+
+#coloured by parent ID
+
+ggplot(data = world) +
+  geom_sf() +
+  coord_sf(xlim = c(124.705, 124.73), ylim = c(10.853, 10.876), expand = FALSE) +
+  geom_curve(data=sib_parent_short,aes(x=parent1.x,y=parent1.y,xend=offsp.x,yend=offsp.y,colour=parent1.id),arrow = arrow(length = unit(0.05, "npc"))) +
+  geom_point(data=sib_parent_short,aes(x=parent1.x,y=parent1.y,colour=parent1.id),size=0.1)
+
 
 
 ## Github Push test
@@ -616,6 +653,49 @@ ggplot(data = world) +
 ## simulations using PO distances from same year as siblings
 
 ## did we have any parents of the full/half siblings in the PO dataset (for identifying dispersal origin)
+
+######## find pairs that have the same or very similar lat + long + dates (= sampled on the same anemone?)
+
+sib_dist
+
+##### find # of decimal points
+decimalplaces <- function(x) {
+  ifelse(abs(x - round(x)) > .Machine$double.eps^0.5,
+         nchar(sub('^\\d+\\.', '', sub('0+$', '', as.character(x)))),
+         0)
+}
+
+decimalplaces(c(234.1, 3.7500, 1.345, 3e-15))
+
+decimalplaces(sib_dist$sib1_lat)
+decimalplaces(sib_dist$sib1_lon)
+decimalplaces(sib_dist$sib2_lat)
+decimalplaces(sib_dist$sib2_lon)
+
+### 5-12 places!!
+
+### finding sibs with same time of capture
+which(sib_dist$sib1_time_date==sib_dist$sib2_time_date)
+### finding sibs with same lat
+which(sib_dist$sib1_lat==sib_dist$sib2_lat)
+### finding sibs with same lat
+which(sib_dist$sib1_lon==sib_dist$sib2_lon)
+
+### finding half-sibs with same time of capture
+which(halfsibs_noNA$time_date_sib1==halfsibs_noNA$time_date_sib2)
+### finding half-sibs with same lat
+which(halfsibs_noNA$lat_sib1==halfsibs_noNA$lat_sib2)
+### finding half-sibs with same lat
+which(halfsibs_noNA$lon_sib1==halfsibs_noNA$lon_sib2)
+
+### finding PO with same time of capture
+which(po_dist$par_time_date==po_dist$offs_time_date)
+### finding PO with same lat
+which(po_dist$par_lat==po_dist$offs_lat)
+### finding PO with same lat
+which(po_dist$par_lon==po_dist$offs_lon)
+
+
 
 
 #### 2014 sibling group
