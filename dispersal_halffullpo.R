@@ -729,3 +729,26 @@ plot(ecdf(halfsibs_noNA$distance),cex=0,lwd=2,col="blue",add=T)
 plot(ecdf(sib_no2014Palanas$dist_km),cex=0,lwd=2,col="gold",add=T)
 
 legend(x=15,y=0.5,legend=c("Unrelated Pairs","Parent-Offspring Pairs","Full Sibling Pairs (2014 Palanas)","Half Sibling Pairs","Full Sibling Pairs (Others)"),col=c("black","purple","red","blue","gold"),lty=c(1,1,1,1,1),lwd=2)
+
+### load in anemone data
+
+load("data/anem_db.RData")
+load("data/fish_db.RData")
+
+
+sib_dist_noNA=na.omit(sib_dist)
+
+sib_dist_noNA$sib1_anemID=NA
+
+for (i in 1:nrow(sib_dist_noNA)){ 
+  sib_dist_noNA$sib1_anemID[i]=anem_db$anem_id[which(anem_db$anem_table_id==fish_db$anem_table_id[which(fish_db$sample_id==sib_dist_noNA$sib1_sample_id[i])])]
+}
+
+sib_dist_noNA$sib2_anemID=NA
+
+for (i in 1:nrow(sib_dist_noNA)){ 
+  sib_dist_noNA$sib2_anemID[i]=anem_db$anem_id[which(anem_db$anem_table_id==fish_db$anem_table_id[which(fish_db$sample_id==sib_dist_noNA$sib2_sample_id[i])])]
+}
+
+#find siblings captured on the same anemone!
+which(sib_dist_noNA$sib1_anemID==sib_dist_noNA$sib2_anemID)
